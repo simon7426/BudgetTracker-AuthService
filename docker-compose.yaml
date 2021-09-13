@@ -1,0 +1,32 @@
+version: "3.9"
+
+services: 
+  db:
+    image: postgres
+    container_name: db
+    expose:
+      - "5432"
+    environment: 
+      - POSTGRES_DB=jwt_auth
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=7426
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - djangonetwork
+  
+  web: 
+    build: .
+    restart: always
+    ports: 
+      - "8000:8000"
+    depends_on: 
+      - db
+    links:
+      - db:db
+    networks:
+      - djangonetwork
+    command: bash -c "python manage.py migrate && gunicorn --bind 0.0.0.0:8000 --workers=4 budget_tracker_auth_service.wsgi"
+networks:
+  djangonetwork:
+    driver: bridge
