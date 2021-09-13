@@ -9,3 +9,5 @@ class Alive(APIView):
             'message': 'Alive'
         }
         return Response(response_obj)
+
+Alive_view = Alive.as_view()
