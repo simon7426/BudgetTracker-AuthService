@@ -11,4 +11,4 @@ EXPOSE 8000
 COPY . /app
 
 # RUN python manage.py migrate
-# CMD ["python", "manage.py", "runserver"]
+CMD ["python", "manage.py", "runserver"]
