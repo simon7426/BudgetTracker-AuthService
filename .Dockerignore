@@ -26,3 +26,5 @@ web/media
 web/static/CACHE
 stats
 Dockerfile
+postgres-data/
+docker-compose.yaml
