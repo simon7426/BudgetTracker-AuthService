@@ -11,4 +11,4 @@ EXPOSE 8000
 COPY . /app
 
 # RUN python manage.py migrate
-CMD ["python", "manage.py", "runserver"]
+CMD ["gunicorn", "budget_tracker_auth_service.wsgi", "--workers","4","--bind","0.0.0.0:8000"]
